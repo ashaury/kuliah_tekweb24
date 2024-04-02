@@ -15,5 +15,10 @@ class MahasiswaModel extends CI_Model{
         return $this->db->query($sql);
         
     }
+    function getMahasiswaByNim($nim){
+        //query builder equal to SELECT * FROM mahasiswa where nim=$nim
+        $this->db->where("nim",$nim);
+        return $this->db->get("mahasiswa");
+    }
 }
 ?>
