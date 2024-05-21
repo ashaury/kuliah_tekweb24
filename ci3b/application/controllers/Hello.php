@@ -2,11 +2,25 @@
 
 class Hello extends CI_Controller
 {
+    
+    public function __construct()
+    {
+        //construct ini akan mengoveride construct awal yang diturunkan oleh Class Parent 
+        //perlu untuk memanggil ulang construct milik parent (CI_Controller)
+        parent::__construct();
+        //JIKA TIDAK LOGIN ARAHKAN KE AUTH/HALAMAN LOGIN
+        if(($this->session->isLogin!='islogin')){
+            redirect(base_url());
+        }
+
+    }
+
     public function index()
     {
         $this->load->model("MahasiswaModel");
         // $mahasiswaModel = new MahasiswaModel();
         $data['nama'] = $this->MahasiswaModel->getMahasiswa();
+        $data['mhs'] = $this->MahasiswaModel->getMahasiswaByNim($this->session->nim);
 
         $conn = mysqli_connect("localhost", "root", "", "db_kuliah");
         $sql = "SELECT * FROM mahasiswa";

@@ -20,5 +20,8 @@ class MahasiswaModel extends CI_Model{
         $this->db->where("nim",$nim);
         return $this->db->get("mahasiswa");
     }
+    function addMahasiswa($mhs){
+        $this->db->insert('mahasiswa',$mhs);
+    }
 }
 ?>
